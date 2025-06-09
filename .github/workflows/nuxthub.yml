@@ -3,10 +3,11 @@ on: push
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/main'
     name: "Deploy to NuxtHub"
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
+      name: production
       url: ${{ steps.deploy.outputs.deployment-url }}
     permissions:
       contents: read
@@ -32,6 +33,8 @@ jobs:
 
       - name: Build application
         run: pnpm build
+        env:
+          NUXT_UI_PRO_LICENSE: ${{ secrets.NUXT_UI_PRO_LICENSE }}
 
       - name: Deploy to NuxtHub
         uses: nuxt-hub/action@v1

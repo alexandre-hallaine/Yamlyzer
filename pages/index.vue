@@ -15,14 +15,30 @@ async function convert() {
 </script>
 
 <template>
-  <UPageSection>
-    <UPageHero title="Hey" />
-    <UTextarea v-model="input" />
-    <UButton
-      label="Convert"
-      :loading
-      @click="convert"
-    />
-    <pre>{{ output }}</pre>
+  <UPageSection
+    title="Yamlyzer"
+    description="Convert raw logs, configs, or CLI output into structured YAML instantly."
+  >
+    <template #links>
+      <UButton
+        label="Convert"
+        :loading
+        @click="convert"
+      />
+    </template>
+
+    <UPageGrid class="lg:grid-cols-2">
+      <UTextarea
+        v-model="input"
+        autoresize
+        placeholder="Paste raw text here..."
+        :ui="{ base: 'h-full' }"
+      />
+      <UCard>
+        <pre class="whitespace-pre-wrap">
+          {{ output }}
+        </pre>
+      </UCard>
+    </UPageGrid>
   </UPageSection>
 </template>

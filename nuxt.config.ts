@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui-pro', '@nuxt/eslint', '@nuxthub/core'],
   $development: { hub: { remote: 'production' } },
   devtools: { enabled: true },
+  app: { head: {
+    title: 'Yamlyzer',
+    htmlAttrs: { lang: 'en' },
+  } },
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-05-15',
   nitro: { experimental: { openAPI: true } },

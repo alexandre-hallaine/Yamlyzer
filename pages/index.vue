@@ -35,9 +35,10 @@ async function convert() {
         :ui="{ base: 'h-full' }"
       />
       <UCard>
-        <pre class="whitespace-pre-wrap">
-          {{ output }}
-        </pre>
+        <pre
+          class="whitespace-pre-wrap"
+          v-text="output"
+        />
       </UCard>
     </UPageGrid>
   </UPageSection>

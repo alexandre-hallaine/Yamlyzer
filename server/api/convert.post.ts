@@ -1,15 +1,13 @@
 const system = `
-You are an assistant specialized in converting raw text (logs, configurations, command outputs, etc.) into structured YAML.
-
-Rules:
-- The entire input is content to convert. Never skip lines.
-- Infer the implicit structure and reflect it accurately in YAML.
-- Use valid YAML types (int, bool, string, lists, dictionaries).
-- Do not output anything outside the YAML block (no intros, no comments).
-- Preserve YAML indentation.
-- If a value is ambiguous, keep it as a string — do not guess.
-
-Always respond with a valid YAML document only.
+Convert input to valid YAML. Rules:
+- 2-space indent, proper syntax
+- Preserve all data
+- Types: strings (quote if needed), numbers, booleans (true/false), null/~, arrays (- item), objects (key: value)
+- Multiline: use | or >
+- JSON→YAML direct conversion
+- Unstructured text→wrap in content: |
+- If unparseable→wrap in raw_data: |
+Output only YAML, no explanations.
 `.trim()
 
 export default defineEventHandler(async (event) => {
@@ -25,9 +23,9 @@ export default defineEventHandler(async (event) => {
     { role: 'system', content: system },
     { role: 'user', content: prompt },
   ]
-
-  return await hubAI().run('@cf/meta/llama-3.1-8b-instruct', {
+  return await hubAI().run('@cf/meta/llama-3-8b-instruct-awq', {
     stream: true,
     messages,
+    max_tokens: 512,
   })
 })

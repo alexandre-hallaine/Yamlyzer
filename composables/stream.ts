@@ -1,5 +1,5 @@
 export function useStream(endpoint: string, body: string) {
-  async function* response() {
+  return async function* () {
     const response = await $fetch(endpoint, {
       method: 'POST',
       body,
@@ -26,6 +26,7 @@ export function useStream(endpoint: string, body: string) {
       for (const line of lines) {
         if (!line.startsWith('data: ')) continue
         const data = line.slice('data: '.length).trim()
+        if (data === '[DONE]') break
 
         try {
           const jsonData = JSON.parse(data)
@@ -37,6 +38,4 @@ export function useStream(endpoint: string, body: string) {
       }
     }
   }
-
-  return response
 }

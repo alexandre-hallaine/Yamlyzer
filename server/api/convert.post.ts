@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     { role: 'system', content: system },
     { role: 'user', content: prompt },
   ]
-  return await hubAI().run('@cf/meta/llama-3-8b-instruct-awq', {
+  return await hubAI().run('@cf/meta/llama-3.1-8b-instruct-awq', {
     stream: true,
     messages,
     max_tokens: 512,

@@ -1,3 +1,3 @@
 <template>
-    <UPageHero title="Hey"/>
+  <UPageHero title="Hey" />
 </template>

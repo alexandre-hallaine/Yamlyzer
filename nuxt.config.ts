@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   nitro: { experimental: { openAPI: true } },
   hub: {
     workers: true,
+    database: true,
     bindings: { compatibilityDate: '2025-05-05' },
   },
   eslint: {
